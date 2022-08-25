@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_mvvm/ui/weather_screen_view_model.dart';
 
-
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({Key? key}) : super(key: key);
 
@@ -66,10 +65,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Text(
                   viewModel.myWeather.temp.toString(),
                   style: const TextStyle(color: Colors.white, fontSize: 80),
-                ),
-                Text(
-                  viewModel.myWeather.icon, //첫번
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ],
             ),
