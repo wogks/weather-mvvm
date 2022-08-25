@@ -11,7 +11,7 @@ class WeatherViewModel extends ChangeNotifier {
   WeatherViewModel() {
     fetchWeatherInfo('seoul');
   }
-  
+
   void fetchWeatherInfo(String query) async {
     isLoading = true;
     notifyListeners();
@@ -20,6 +20,9 @@ class WeatherViewModel extends ChangeNotifier {
     notifyListeners();
 
     isLoading = false;
+  }
+   String convertTemp(num F) {
+    return (F - 273.15).toStringAsFixed(1);
   }
 }
 

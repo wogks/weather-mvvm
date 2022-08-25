@@ -29,50 +29,54 @@ class _WeatherScreenState extends State<WeatherScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  enabledBorder: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    enabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      borderSide: BorderSide(color: Colors.white, width: 2),
                     ),
-                    borderSide: BorderSide(color: Colors.white, width: 2),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        viewModel.fetchWeatherInfo(_controller.text);
+                      },
+                      child: const Icon(Icons.search),
+                    ),
+                    hintText: '검색어를 입력하세요',
                   ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      viewModel.fetchWeatherInfo(_controller.text);
-                    },
-                    child: const Icon(Icons.search),
-                  ),
-                  hintText: '검색어를 입력하세요',
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 90,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  viewModel.myWeather.cityName,
-                  style: const TextStyle(color: Colors.white, fontSize: 40),
-                ),
-                Text(
-                  viewModel.myWeather.temp.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 80),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: _middleContainer(),
-            )
-          ],
+              const SizedBox(
+                height: 90,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    viewModel.myWeather.cityName,
+                    style: const TextStyle(color: Colors.white, fontSize: 40),
+                  ),
+                  Text(
+                    viewModel.myWeather.temp.toString(),
+                    style: const TextStyle(color: Colors.white, fontSize: 80),
+                  ),
+                  Text('${viewModel.convertTemp(viewModel.myWeather.temp)}°',
+                        style: const TextStyle(color: Colors.white, fontSize: 80)),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: _middleContainer(),
+              )
+            ],
+          ),
         ),
       ),
     );
